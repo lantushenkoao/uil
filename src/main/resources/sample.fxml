@@ -3,18 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" minWidth="400.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lantushenkoao.iul.Controller">
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
-   <children>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<GridPane alignment="center" hgap="10.0" minWidth="400.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lantushenkoao.iul.Controller">
+   <VBox spacing="10">
+      <Label text="Тип документа:"/>
+      <ChoiceBox fx:id="cbTemplate"  prefWidth="250.0"/>
       <Button mnemonicParsing="false" onAction="#onSelectDirectoryClick" text="Выберите каталог с файлами" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label fx:id="lbMessage" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-   </children>
+   </VBox>
 </GridPane>
