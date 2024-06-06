@@ -10,6 +10,8 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,16 +24,17 @@ public class CombinedTemplateProcessor {
     private String destinationFileName;
     private MessageHandler handler;
 
-    public CombinedTemplateProcessor(MessageHandler handler, List<FileDescriptor> files, String destinationFileName) {
+    public CombinedTemplateProcessor(MessageHandler handler, List<FileDescriptor> files, String destinationFileName, File templateFile) {
         this.files = files;
         this.handler = handler;
-        this.template = new TemplateFactory().find(TemplateFactory.TEMPLATE_COMBINED);
+        this.template = new TemplateFactory.Template(templateFile.getName(), templateFile.getAbsolutePath());
         this.destinationFileName = destinationFileName;
     }
 
     public void writeFilesToTable() {
+        System.out.println("Template: " + template.getTemplate());
         try (XWPFDocument document = new XWPFDocument(
-                getClass().getResourceAsStream(template.getTemplate()))) {
+                new FileInputStream(template.getTemplate()))) {
 
             this.wordProcessor = new WordTemplateHelper(handler, files, destinationFileName,
                     document, new CombinedTemplateSubstitutor());

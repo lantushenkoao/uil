@@ -8,6 +8,7 @@ import com.lantushenkoao.iul.subsititutors.SplitTemplateSubstitutor;
 import org.apache.poi.xwpf.usermodel.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -20,16 +21,16 @@ public class SplitTemplateProcessor {
     private String destinationFileName;
     private MessageHandler handler;
 
-    public SplitTemplateProcessor(MessageHandler handler, List<FileDescriptor> files, String destinationFileName){
+    public SplitTemplateProcessor(MessageHandler handler, List<FileDescriptor> files, String destinationFileName, File templateFile){
         this.files = files;
         this.handler = handler;
-        this.template = new TemplateFactory().find(TemplateFactory.TEMPLATE_SPLIT);
+        this.template = new TemplateFactory.Template(templateFile.getName(), templateFile.getAbsolutePath());
         this.destinationFileName = destinationFileName;
     }
 
     public void writeFilesToTable(){
         try (XWPFDocument document = new XWPFDocument(
-                getClass().getResourceAsStream(template.getTemplate()))) {
+                new FileInputStream(template.getTemplate()))) {
 
             this.wordProcessor = new WordTemplateHelper(handler, files, destinationFileName,
                     document, new SplitTemplateSubstitutor());

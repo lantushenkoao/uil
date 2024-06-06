@@ -7,9 +7,17 @@
 <?import java.lang.String?>
 <GridPane alignment="center" hgap="10.0" minWidth="400.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lantushenkoao.iul.Controller">
    <VBox spacing="10">
+      <Label text="Сначала выберите файл темплейта" />
+      <Label text="Для совмещенного формата используйте template_combined.docx, " />
+      <Label text="для раздельного template_split.docx" />
+      <Button mnemonicParsing="false" onAction="#onSelectTemplateClick" text="Выберите файл темплейта (docx)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Файл темплейта:" />
+      <Label fx:id="lbTemplateFilePath" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label text="Тип документа:"/>
       <ChoiceBox fx:id="cbTemplate"  prefWidth="250.0"/>
       <Button mnemonicParsing="false" onAction="#onSelectDirectoryClick" text="Выберите каталог с файлами" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
       <Label fx:id="lbMessage" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
    </VBox>
 </GridPane>
